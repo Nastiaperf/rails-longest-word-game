@@ -1,3 +1,5 @@
+require
+
 class GamesController < ApplicationController
   def new
     @letters = Array.new(10) { ('A'..'Z').to_a.sample }
@@ -19,8 +21,8 @@ class GamesController < ApplicationController
   end
 
   def english_word
-    response = URI.open("https://wagon-dictionary.herokuapp.com/#{params[:word]}")
-    json = JSON.parse(response.read)
+    url = "https://wagon-dictionary.herokuapp.com/#{params[:word]}"
+    json = JSON.parse(open(url).read)
     json['found']
   end
 end
